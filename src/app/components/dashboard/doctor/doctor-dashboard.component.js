@@ -18,6 +18,7 @@ var DoctorDashboardComponent = (function () {
         this.requestsService = requestsService;
         this.router = router;
         this.titleService = titleService;
+        this.title = "Doctor Dashboard";
     }
     ;
     DoctorDashboardComponent.prototype.ngOnInit = function () {

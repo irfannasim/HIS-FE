@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
-import {Headers, RequestOptions, Response, ResponseContentType} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 import {Router} from '@angular/router';
 import {AppConfig} from '../configuration/app.config';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {RoleAndPermission} from '../model/roleandpermission';
+import {Receptionist} from '../model/Receptionist';
+import {Observable} from "rxjs/Observable";
+import {RequestOptions} from "@angular/http";
 
 @Injectable()
 export class RequestsService {
@@ -41,45 +43,54 @@ export class RequestsService {
         return this.http.post(URI, _params, {headers: reqHeader});
     }
 
-    /*    deleteRequest(url: any, _params: any) {
-            const headers = new Headers();
-            if (this.getToken()) {
-                headers.append('Authorization', 'auth_token ' + this.getToken());
-            }
-            return this.http.delete(this.getBEAPIServer() + url, {headers: headers})
-                .map((response: Response) => response.json());
-        };*/
+    getRequest(url: any) {
+        const reqHeader = new HttpHeaders({'Authorization': 'Bearer ' + atob(this.getToken())});
+        reqHeader.append('Content-Type', 'application/json');
+        return this.http.get(this.getBEAPIServer() + url, {headers: reqHeader});
+    }
 
-    /* getRequest(url: any, _params: any) {
-         const headers = new Headers();
-         if (this.getToken()) {
-             headers.append('Authorization', 'Bearer ' + this.getToken());
-         }
-         if (_params.length > 0) {
-             return this.http.get(this.getBEAPIServer() + url + '?' + _params, {headers: headers})
-                 .map((response: Response) => response.json());
-         } else {
-             return this.http.get(this.getBEAPIServer() + url, {headers: headers})
-                 .map((response: Response) => response.json());
-         }
-     }*/
     postRequest(url: any, _params: any) {
         const reqHeader = new HttpHeaders({'Authorization': 'Bearer ' + atob(this.getToken())});
         reqHeader.append('Content-Type', 'application/json');
-        console.log(reqHeader);
         return this.http.post(this.getBEAPIServer() + url, _params, {headers: reqHeader});
     }
 
-    /*  putRequest(url: any, _params: any) {
-          const headers = new Headers();
-          if (this.getToken()) {
-              headers.append('Authorization', 'Bearer ' + this.getToken());
-          }
-          headers.append('Content-Type', 'application/json');
-          return this.http.put(this.getBEAPIServer() + url, _params, {headers: headers})
-              .map((response: Response) => {
-                  return response.json();
-              }).catch(this.handleError);
-      }*/
+    deleteRequest(url: any) {
+        const reqHeader = new HttpHeaders({'Authorization': 'Bearer ' + atob(this.getToken())});
+        reqHeader.append('Content-Type', 'application/json');
+        return this.http.delete(this.getBEAPIServer() + url, {headers: reqHeader});
+
+    }
+
+    findById(url: any): Observable<any> {
+        const reqHeader = new HttpHeaders({'Authorization': 'Bearer ' + atob(this.getToken())});
+        reqHeader.append('Content-Type', 'application/json');
+        return this.http.get(this.getBEAPIServer() + url, {headers: reqHeader})
+            .map((data: any) => {
+                return data.responseData as Object;
+            });
+        ;
+        //.catch((error:any) => Observable.throw(error.json().error || 'Error'));
+    }
+
+    putRequest(url: any, _params: any) {
+        const reqHeader = new HttpHeaders({'Authorization': 'Bearer ' + atob(this.getToken())});
+        reqHeader.append('Content-Type', 'application/json');
+        return this.http.put(this.getBEAPIServer() + url, _params, {headers: reqHeader});
+    }
+
+    getRequestWithParam(url: any, param: any) {
+        const reqHeader = new HttpHeaders({'Authorization': 'Bearer ' + atob(this.getToken())});
+        reqHeader.append('Content-Type', 'application/json');
+        let params = new HttpParams().set('name', param);
+        return this.http.get(this.getBEAPIServer() + url, {headers: reqHeader, params: params});
+    }
+
+    postRequestMultipartFormData(url: any, data: any) {
+        const reqHeader = new HttpHeaders({'Authorization': 'Bearer ' + atob(this.getToken())});
+        let formData: FormData = new FormData();
+        formData.append('file', data, data.name);
+        return this.http.post(this.getBEAPIServer() + url, formData, {headers: reqHeader});
+    }
 
 }

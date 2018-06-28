@@ -6,13 +6,12 @@ export class PermissionsService {
     constructor() {
     }
 
-    public loadPermissions(dbPermissions: string[]) {
+    public loadPermissions(dbPermissions: any[]) {
         let permissions: string[] = [];
         dbPermissions.forEach((item, index) => {
-            permissions[index] = item['permission'];
+            permissions[index] = item['name'];
         });
         window.localStorage.setItem(btoa('permissions'), btoa(JSON.stringify(permissions)));
-        //console.log('load permissions');
     }
 
     public unloadPermissions() {
@@ -38,4 +37,5 @@ export class PermissionsService {
     ngOnInit() {
 
     }
+
 }

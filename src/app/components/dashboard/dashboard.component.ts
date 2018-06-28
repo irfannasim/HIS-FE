@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {RequestsService} from '../../services/requests.service';
 import {Title} from '@angular/platform-browser';
@@ -8,7 +8,7 @@ import {Title} from '@angular/platform-browser';
     templateUrl: '../../templates/dashboard/dashboard.template.html',
     styleUrls: [],
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit{
 
     constructor(private requestsService: RequestsService,
                 private router: Router,
@@ -19,6 +19,8 @@ export class DashboardComponent {
         if (!window.localStorage.getItem(btoa('access_token'))) {
             this.router.navigate(['/login']);
         }
+        // alert('DashboardComponent ngOnInit');
+        // alert(window.localStorage.getItem(btoa('access_token')));
         this.titleService.setTitle('HIS | Dashboard');
     }
 }

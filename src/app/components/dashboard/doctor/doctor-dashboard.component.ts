@@ -10,6 +10,8 @@ import {Title} from '@angular/platform-browser';
 })
 export class DoctorDashboardComponent {
 
+    title: string = "Doctor Dashboard";
+
     constructor(private requestsService: RequestsService,
                 private router: Router,
                 private titleService: Title) {

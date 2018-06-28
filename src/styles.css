@@ -1,4 +1,9 @@
 /* Master Styles */
+/*
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+*/
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
 h1 {
   color: #369;
   font-family: Arial, Helvetica, sans-serif;
@@ -63,3 +68,21 @@ nav a.active {
 * {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.loading {
+  opacity: 0;
+  transition: opacity .8s ease-in-out;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #000;
+  z-index: -1;
+}
+/* .loading screen is visible when app is not bootstrapped yet, my-app is empty */
+my-app:empty + .loading {
+  opacity: 1;
+  z-index: 100;
+}
+.snackbar-success { background-color: green !important; }
