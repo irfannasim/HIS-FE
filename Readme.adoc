@@ -40,14 +40,14 @@ After successfull downloding of node modules, application is fully configured. y
 
 == HOW to RUN / WHERE to START 
 
-* You have run the below command to start webpack server / start the application.
+* You have to run the below command to start webpack server / start the application.
 
 [indent=0]
 ----
 	npm start
 ----
 
-* Application will start on `8181` port, and you can access the by below url:
+* Application will start on `8181` port, and you can access the application by below url:
 
 [indent=0]
 ----
@@ -56,7 +56,7 @@ After successfull downloding of node modules, application is fully configured. y
 
 == HOW to Create Build
 
-* You have run the below command to create build
+* You have to run the below command to create build:
 
 [indent=0]
 ----
