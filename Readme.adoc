@@ -9,7 +9,7 @@ This is a project contains the following technologies:
 
 == Installation and Getting Started
 
-* Make sure the below things are already installed on your system:
+Make sure the below things are already installed on your system:
 
 * Node 8.0
 * Webstorm IDE - version / any HTML and JavaScript editor
